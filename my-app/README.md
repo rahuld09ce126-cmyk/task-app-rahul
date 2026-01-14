@@ -78,7 +78,90 @@ task-app-rahul/
 
 ## 🔧 Project Setup
 
-### 1️⃣ Clone Repository
-```bash
+### Clone Repository
+
 git clone https://github.com/rahuld09ce126-cmyk/task-app-rahul.git
 cd my-app
+
+   | Description            |
+|--------|------------------|----------------------|
+| GET    | `/api/tasks`       | List all tasks        |
+| POST   | `/api/tasks`       | Create a new task     |
+| GET    | `/api/tasks/{id}`  | Get task details      |
+| PUT    | `/api/tasks/{id}`  | Update a task         |
+| DELETE | `/api/tasks/{id}`  | Delete a task         |
+
+### Example: Create Task
+```bash
+curl -X POST http://127.0.0.1:8000/api/tasks `
+-H "Content-Type: application/json" `
+-d '{"title":"My first task"}'
+```
+
+Response:
+```json
+{
+  "data": {
+    "id": 1,
+    "title": "My first task"
+  }
+}
+```
+
+---
+
+## Running Tests
+
+Laravel Feature tests can be run with:
+
+```bash
+php artisan test
+```
+
+---
+
+## Laravel server
+- Start Laravel server
+```bash
+php artisan serve
+```
+---
+
+## Frontend (Vue 3)
+
+- Main component: `resources/js/components/TaskApp.vue`  
+- Entry point: `resources/js/app.js`  
+- Compile assets:
+```bash
+npm run dev      # development
+npm run build    # production
+```
+
+
+- Include the div in your Blade template:
+```html
+<div id="app"></div>
+@vite('resources/js/app.js')
+```
+-----
+
+## HTTP Status Codes Used
+
+| Code | Meaning |
+|------|---------|
+| 200  | OK (success with response data) |
+| 201  | Created (resource successfully created) |
+| 204  | No Content (resource deleted successfully) |
+| 422  | Unprocessable Entity (validation failed) |
+
+---
+
+## Notes / Tips
+
+- Use **PHP 8.1+** for Laravel 10 compatibility  
+- Use MySQL 5.7+ or MariaDB 10.4+ for UTF8 `utf8mb4` support  
+- `204` is returned for DELETE success, `201` for POST create success  
+- Use `php artisan migrate:fresh` to reset the database during development  
+- You can extend Vue components into smaller pieces: `TaskList`, `TaskItem`, `TaskForm`
+
+---
