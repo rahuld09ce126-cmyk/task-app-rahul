@@ -83,6 +83,75 @@ task-app-rahul/
 git clone https://github.com/rahuld09ce126-cmyk/task-app-rahul.git
 cd my-app
 
+### Install PHP dependencies**
+```bash
+composer install
+```
+
+## Copy environment file**
+```bash
+copy .env.example .env   # Windows
+```
+
+## Set environment variables**  
+Edit \`.env\` with your database credentials:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=task_app
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Generate application key**
+```bash
+php artisan key:generate
+```
+---
+
+## Start Laravel server
+```bash
+php artisan serve
+```
+---
+## Running Tests
+
+Laravel Feature tests can be run with:
+
+```bash
+php artisan test
+```
+---
+
+## Install frontend dependencies**
+```bash
+npm install
+```
+---
+
+## Frontend (Vue 3)
+
+- Main component: `resources/js/components/TaskApp.vue`  
+- Entry point: `resources/js/app.js`  
+- Compile assets:
+```bash
+npm run dev      # development
+npm run build    # production
+```
+
+- Include the div in your Blade template:
+```html
+<div id="app"></div>
+@vite('resources/js/app.js')
+```
+---
+
+Open browser: `http://127.0.0.1:8000`
+
+---
+
    | Description            |
 |--------|------------------|----------------------|
 | GET    | `/api/tasks`       | List all tasks        |
@@ -109,41 +178,6 @@ Response:
 ```
 
 ---
-
-## Running Tests
-
-Laravel Feature tests can be run with:
-
-```bash
-php artisan test
-```
-
----
-
-## Laravel server
-- Start Laravel server
-```bash
-php artisan serve
-```
----
-
-## Frontend (Vue 3)
-
-- Main component: `resources/js/components/TaskApp.vue`  
-- Entry point: `resources/js/app.js`  
-- Compile assets:
-```bash
-npm run dev      # development
-npm run build    # production
-```
-
-
-- Include the div in your Blade template:
-```html
-<div id="app"></div>
-@vite('resources/js/app.js')
-```
------
 
 ## HTTP Status Codes Used
 
