@@ -1,44 +1,201 @@
-# Task App
+# Task Management Application (Laravel 10 + Vue 3)
 
-## Project Description
-This Task App is a simple yet effective application that helps users manage their daily tasks efficiently. It features a user-friendly interface, allowing users to add, edit, and delete tasks, ensuring that nothing important is ever forgotten.
+This project is a **Task Management Application** developed as part of a **Senior Laravel Developer Technical Assessment**.  
+It demonstrates clean backend architecture using **Laravel 10** and a simple functional frontend built with **Vue.js 3**.
 
-## Installation Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/rahuld09ce126-cmyk/task-app-rahul.git
-   cd task-app-rahul
-   ```
-2. Install the necessary packages:
-   ```bash
-   npm install
-   ```
-3. Start the application:
-   ```bash
-   npm start
-   ```
+The focus of this project is **code quality, REST API design, validation, testing, and best practices**, not UI styling.
 
-## Usage Guide
-- **Adding a Task**: Click on the 'Add Task' button and enter your task details.
-- **Editing a Task**: Click on the task you want to edit, make your changes, and save.
-- **Deleting a Task**: Click the 'Delete' button next to the task you wish to remove.
+---
+## Repository Structure
+task-app-rahul/
+ └── my-app/
+     ├── app/
+     ├── database/
+     ├── resources/
+     ├── routes/
+     ├── tests/
+     ├── composer.json
+     └── package.json
 
-## Contribution Guidelines
-We welcome contributions! To get started:
-1. Fork the repository.
-2. Create a new branch for your feature:
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Make your changes and commit them:
-   ```bash
-   git commit -m 'Add some feature'
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/YourFeature
-   ```
-5. Open a Pull Request.
+---
 
-## License
-This project is licensed under the MIT License.
+## Tech Stack
+
+### Backend
+- Laravel 10
+- PHP 8.1+
+- RESTful API
+- PHPUnit (Feature Tests)
+
+### Frontend
+- Vue.js 3 (Composition API)
+- Axios
+- Vite
+
+### Database
+- MySQL
+
+---
+
+## Features
+
+### Backend (Laravel API)
+- Task CRUD operations
+- Task status management (`pending`, `in_progress`, `completed`)
+- Filtering by status (`?status=pending`)
+- Pagination (10 items per page)
+- Soft deletes
+- Form Request validation
+- API Resource response formatting
+- Proper HTTP status codes
+- Feature tests
+
+### Frontend (Vue 3)
+- List all tasks
+- Create a new task
+- Update task status
+- Delete a task
+- Pagination using API links (`next` / `prev`)
+
+---
+
+## Database Schema
+
+### `tasks` table
+
+| Column | Type |
+|------|-----|
+| id | bigint |
+| title | string |
+| description | text (nullable) |
+| status | enum |
+| due_date | date (nullable) |
+| created_at | timestamp |
+| updated_at | timestamp |
+| deleted_at | timestamp (soft delete) |
+
+---
+
+## 🔧 Project Setup
+
+### Clone Repository
+
+git clone https://github.com/rahuld09ce126-cmyk/task-app-rahul.git
+cd my-app
+
+### Install PHP dependencies**
+```bash
+composer install
+```
+
+## Copy environment file**
+```bash
+copy .env.example .env   # Windows
+```
+
+## Set environment variables**  
+Edit \`.env\` with your database credentials:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=task_app
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Generate application key**
+```bash
+php artisan key:generate
+```
+---
+
+## Start Laravel server
+```bash
+php artisan serve
+```
+---
+## Running Tests
+
+Laravel Feature tests can be run with:
+
+```bash
+php artisan test
+```
+---
+
+## Install frontend dependencies**
+```bash
+npm install
+```
+---
+
+## Frontend (Vue 3)
+
+- Main component: `resources/js/components/TaskApp.vue`  
+- Entry point: `resources/js/app.js`  
+- Compile assets:
+```bash
+npm run dev      # development
+npm run build    # production
+```
+
+- Include the div in your Blade template:
+```html
+<div id="app"></div>
+@vite('resources/js/app.js')
+```
+---
+
+Open browser: `http://127.0.0.1:8000`
+
+---
+
+   | Description            |
+|--------|------------------|----------------------|
+| GET    | `/api/tasks`       | List all tasks        |
+| POST   | `/api/tasks`       | Create a new task     |
+| GET    | `/api/tasks/{id}`  | Get task details      |
+| PUT    | `/api/tasks/{id}`  | Update a task         |
+| DELETE | `/api/tasks/{id}`  | Delete a task         |
+
+### Example: Create Task
+```bash
+curl -X POST http://127.0.0.1:8000/api/tasks `
+-H "Content-Type: application/json" `
+-d '{"title":"My first task"}'
+```
+
+Response:
+```json
+{
+  "data": {
+    "id": 1,
+    "title": "My first task"
+  }
+}
+```
+
+---
+
+## HTTP Status Codes Used
+
+| Code | Meaning |
+|------|---------|
+| 200  | OK (success with response data) |
+| 201  | Created (resource successfully created) |
+| 204  | No Content (resource deleted successfully) |
+| 422  | Unprocessable Entity (validation failed) |
+
+---
+
+## Notes / Tips
+
+- Use **PHP 8.1+** for Laravel 10 compatibility  
+- Use MySQL 5.7+ or MariaDB 10.4+ for UTF8 `utf8mb4` support  
+- `204` is returned for DELETE success, `201` for POST create success  
+- Use `php artisan migrate:fresh` to reset the database during development  
+- You can extend Vue components into smaller pieces: `TaskList`, `TaskItem`, `TaskForm`
+
+---
